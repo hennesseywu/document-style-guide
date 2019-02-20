@@ -21,6 +21,10 @@
  * [命名规范](docs/css.md)
  * [其他规范](docs/css-other.md)
 
+## javascript规范
+
+ * [命名规范](docs/js.md)
+
 
 ## License
 
