@@ -23,7 +23,11 @@
 
 ## javascript规范
 
- * [命名规范](docs/js.md)
+ * [规范](docs/js.md)
+
+## vue开发风格
+
+* [规范](https://cn.vuejs.org/v2/style-guide/)
 
 
 ## License
