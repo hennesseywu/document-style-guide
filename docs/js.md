@@ -172,53 +172,55 @@ loadingData.then(callback);
 
 3.尽量写全。不用缩写，除非是下面列表中约定的；（变量以表达清楚为目标，uglify 会完成压缩体积工作）
 
-| 常用词 | 说明 |
-| ------ | ------ | ------ |
+| 常用词 | 说明 
+| ------ | ------ 
 | options | 表示选项，与 jQuery 社区保持一致，不要用 config, opts 等|
 |active |表示当前，不要用 current 等
+|index |表示索引，不要用 idx 等
+|trigger| 触点元素
+|triggerType| 触发类型、方式
+|context| 表示传入的 this 对象
+|object| 推荐写全，不推荐简写为 o, obj 等
+|element| 推荐写全，不推荐简写为 el, elem 等
+|length | 不要写成 len, l
+|prev|previous 的缩写
+|next|  next 下一个
+|constructor| 不能写成 ctor
+|easing  |表示动画平滑函数
+|min |minimize 的缩写
+|max |maximize 的缩写
+|DOM |不要写成 dom, Dom
+|.hbs|  使用 hbs 后缀表示模版
+|btn |button 的缩写
+|link | 超链接
+|title |主要文本
+|img| 图片路径（img标签src属性）
+|dataset| html5 data-xxx 数据接口
+|theme| 主题
+|className |类名
+|classNameSpace|  class 命名空间
 
+### True 和 False 布尔表达式
 
-index 表示索引，不要用 idx 等
-trigger 触点元素
-triggerType 触发类型、方式
-context 表示传入的 this 对象
-object  推荐写全，不推荐简写为 o, obj 等
-element 推荐写全，不推荐简写为 el, elem 等
-length  不要写成 len, l
-prev  previous 的缩写
-next  next 下一个
-constructor 不能写成 ctor
-easing  示动画平滑函数
-min minimize 的缩写
-max maximize 的缩写
-DOM 不要写成 dom, Dom
-.hbs  使用 hbs 后缀表示模版
-btn button 的缩写
-link  超链接
-title 主要文本
-img 图片路径（img标签src属性）
-dataset html5 data-xxx 数据接口
-theme 主题
-className 类名
-classNameSpace  class 命名空间
-True 和 False 布尔表达式
 类型检测优先使用 typeof。对象类型检测使用 instanceof。null 或 undefined 的检测使用 == null。
 
 下面的布尔表达式都返回 false:
 
-null
-undefined
-'' 空字符串
-0 数字0
+* null
+* undefined
+* '' 空字符串
+* 0 数字0
 但小心下面的, 可都返回 true:
 
-'0' 字符串0
-[] 空数组
-{} 空对象
-不要在 Array 上使用 for-in 循环
+* '0' 字符串0
+* [] 空数组
+* {} 空对象
+
+### 不要在 Array 上使用 for-in 循环
+
 for-in 循环只用于  object/map/hash  的遍历, 对  Array  用 for-in 循环有时会出错. 因为它并不是从 0 到 length - 1 进行遍历, 而是所有出现在对象及其原型链的键值。
 
-复制代码
+```js
 // Not recommended
 function printArray(arr) {
   for (var key in arr) {
@@ -249,11 +251,15 @@ function printArray(arr) {
     print(arr[i]);
   }
 }
-复制代码
-二元和三元操作符
+
+```
+
+### 二元和三元操作符
+
 操作符始终写在前一行, 以免分号的隐式插入产生预想不到的问题。
 
-复制代码
+```javascript
+
 var x = a ? b : c;
 
 var y = a ?
@@ -262,16 +268,22 @@ var y = a ?
 var z = a ?
         moreComplicatedB :
         moreComplicatedC;
-复制代码
+
+
   .  操作符也是如此：
 
 var x = foo.bar().
     doSomething().
     doSomethingElse();
-条件(三元)操作符 (?:)
+
+```
+
+### 条件(三元)操作符 (?:)
+
 三元操作符用于替代 if 条件判断语句。
 
-复制代码
+```javascript
+
 // Not recommended
 if (val != 0) {
   return foo();
@@ -281,11 +293,15 @@ if (val != 0) {
 
 // Recommended
 return val ? foo() : bar();
-复制代码
-&& 和 ||
+```
+
+
+### && 和 ||
+
 二元布尔操作符是可短路的, 只有在必要时才会计算到最后一项。
 
-复制代码
+```javascript
+
 // Not recommended
 function foo(opt_win) {
   var win;
@@ -315,12 +331,16 @@ var kid = node && node.kids && node.kids[index];
 if (kid) {
   foo(kid);
 }
-复制代码
-3.性能优化
-避免不必要的 DOM 操作
+```
+
+## 3.性能优化
+
+### 避免不必要的 DOM 操作
+
 浏览器遍历 DOM 元素的代价是昂贵的。最简单优化 DOM 树查询的方案是，当一个元素出现多次时，将它保存在一个变量中，就避免多次查询 DOM 树了。
 
-复制代码
+```javascript
+
 // Recommended
 var myList = "";
 var myListHTML = document.getElementById("myList").innerHTML;
@@ -335,13 +355,16 @@ myListHTML = myList;
 for (var i = 0; i < 100; i++) {
   document.getElementById("myList").innerHTML += "<span>" + i + "</span>";
 }
-复制代码
-缓存数组长度
+````
+
+### 缓存数组长度
+
 循环无疑是和 JavaScript 性能非常相关的一部分。通过存储数组的长度，可以有效避免每次循环重新计算。
 
 注: 虽然现代浏览器引擎会自动优化这个过程，但是不要忘记还有旧的浏览器。
 
-复制代码
+```javascript
+
 var arr = new Array(1000),
     len, i;
 // Recommended - size is calculated only 1 time and then stored
@@ -353,11 +376,14 @@ for (i = 0, len = arr.length; i < len; i++) {
 for (i = 0; i < arr.length; i++) {
 
 }
-复制代码
-异步加载第三方内容
+```
+
+### 异步加载第三方内容
+
 当你无法保证嵌入第三方内容比如 Youtube 视频或者一个 like/tweet 按钮可以正常工作的时候，你需要考虑用异步加载这些代码，避免阻塞整个页面加载。
 
-复制代码
+```javascript
+
 (function() {
 
     var script,
@@ -375,3 +401,5 @@ for (i = 0; i < arr.length; i++) {
     load('//s.widgetsite.com/widget.js');
 
 }());
+
+```
