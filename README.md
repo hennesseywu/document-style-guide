@@ -13,7 +13,9 @@
 
 ## css规范
 
- * [规范](docs/css.md)
+ * [命名规范](docs/css.md)
+ * [其他规范](docs/css-other.md)
+
 
 ## License
 
