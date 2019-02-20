@@ -13,7 +13,7 @@
 
 ## html规范
 
-* [命名规范](docs/html.md)
+* [规范](docs/html.md)
 
 
 ## css规范
