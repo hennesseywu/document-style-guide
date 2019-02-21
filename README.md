@@ -30,6 +30,3 @@
 * [规范](https://cn.vuejs.org/v2/style-guide/)
 
 
-## License
-
-公共领域（public domain）
